@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('old_price');
             $table->integer('sale_price');
             $table->string('thumb');
-            $table->foreignId('category_id')->constrained('categories', 'id');
+            $table->foreignId('category_id')->constrained('categories', 'id')->onDelete('cascade');
             $table->tinyInteger('status');
             $table->timestamps();
         });

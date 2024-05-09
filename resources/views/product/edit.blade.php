@@ -3,18 +3,16 @@
     <style>
         .image-preview {
             display: inline-block;
+            margin-top: 10px;
             margin-right: 10px;
         }
 
         .image-preview img {
             max-width: 100px;
-            max-height: 100px;
+            max-height: 150px;
             margin-bottom: 5px;
         }
 
-        .delete-icon {
-            cursor: pointer;
-        }
     </style>
 @endpush
 @section('content')
@@ -31,40 +29,42 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data" data-plugin="dropzone"
-                          data-previews-container="#file-images"
-                          data-upload-preview-template=".upload-product-preview">
+{{--                    <form action="{{route('products.update', $product->id)}}" method="post" enctype="multipart/form-data" data-plugin="dropzone"--}}
+{{--                          data-previews-container="#file-images"--}}
+{{--                          data-upload-preview-template=".upload-product-preview">--}}
+                    <form action="{{route('products.update', $product->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-xl-6" data-select2-id="6">
                                 <div class="form-group">
                                     <label for="name">Tên sản phẩm</label>
                                     <input type="text" id="name" name="name" class="form-control"
-                                           placeholder="Nhập tên sản phẩm" value="{{old('name')}}">
+                                           placeholder="Nhập tên sản phẩm" value="{{$product->name}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="slug">Slug</label>
                                     <input type="text" id="slug" name="slug" class="form-control"
-                                           placeholder="Nhập slug" value="{{old('slug')}}">
+                                           placeholder="Nhập slug" value="{{$product->slug}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Mô tả</label>
                                     <textarea class="form-control" id="description" name="description" rows="5"
-                                              placeholder="Nhập mô tả">{{old('description')}}</textarea>
+                                              placeholder="Nhập mô tả">{{$product->description}}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="old_price">Giá sản phẩm</label>
                                     <input type="number" min="0" id="old_price" name="old_price" class="form-control"
-                                           placeholder="Giá sản phẩm" value="{{old('old_price')}}">
+                                           placeholder="Giá sản phẩm" value="{{$product->old_price}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="sale_price">Giá bán sản phẩm</label>
                                     <input type="number" min="0" id="sale_price" name="sale_price" class="form-control"
-                                           placeholder="Giá bán sản phẩm" value="{{old('sale_price')}}">
+                                           placeholder="Giá bán sản phẩm" value="{{$product->sale_price}}">
                                 </div>
 
                                 <div class="form-group" data-select2-id="5">
@@ -74,7 +74,10 @@
                                             data-select2-id="1" tabindex="-1" aria-hidden="true">
 {{--                                        <option data-select2-id="3">Select</option>--}}
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}"
+                                                    @if($category->id === $product->category_id) selected @endif>
+                                                {{$category->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -86,7 +89,7 @@
                                         @foreach($listStatus as $key => $status)
                                             <input class="form-check-input" type="radio" name="status" id="status{{$status->value}}"
                                                    value="{{$status->value}}"
-                                                   @if ($loop->first)
+                                                   @if ($status->value === $product->status)
                                                        checked
                                                    @endif>
                                             <label class="form-check-label mr-5" for="status{{$status->value}}">
@@ -100,81 +103,39 @@
 
                             <div class="col-xl-6">
                                 <div class="form-group">
-                                    <label for="product_images">Ảnh sản phẩm</label>
+                                    <label>Ảnh sản phẩm</label>
+                                    <div>
+                                        @foreach($product->images as $image)
+                                            <div class="image-preview">
+                                                <img src="{{asset('storage\\').$image->path}}" class="preview-image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_images">Thay đổi ảnh sản phẩm</label>
                                     <input type="file" class="form-control-file" id="product_images" name="images[]" multiple>
                                     <div id="preview-container"></div>
                                 </div>
+                                <hr class="" style="width:100%;height:1px;border-width:0;color:gray;background-color:#ddd">
                                 <div class="form-group">
                                     <label for="single_image">Ảnh đại diện</label>
-                                    <input type="file" class="form-control-file" id="single_image" name="thumb">
-                                    <div id="single_image_preview"></div>
+                                    <div>
+                                        <div class="image-preview">
+                                            <img src="{{asset('storage\\').$image->path}}" class="preview-image">
+                                        </div>
+                                    </div>
                                 </div>
-{{--                                <div class="form-group mt-3 mt-xl-0">--}}
-{{--                                    <label for="projectname">Ảnh sản phẩm</label>--}}
-{{--                                    --}}{{--                                    <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>--}}
-{{--                                    <!-- File Upload -->--}}
-{{--                                    <div class="dropzone">--}}
-{{--                                        <div class="fallback">--}}
-{{--                                            <input type="file" name="images"  value="{{old('images')}}"/>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="dz-message needsclick">--}}
-{{--                                            <i class="h1 text-muted dripicons-cloud-upload"></i>--}}
-{{--                                            <h3>Drop files here or click to upload.</h3>--}}
-{{--                                        </div>--}}
-
-{{--                                        <!-- Preview -->--}}
-{{--                                        <div class="dropzone-previews mt-3" id="file-images"></div>--}}
-
-{{--                                        <!-- file preview template -->--}}
-{{--                                        <div class="d-none upload-product-preview">--}}
-{{--                                            <div class="card mt-1 mb-0 shadow-none border">--}}
-{{--                                                <div class="p-2">--}}
-{{--                                                    <div class="row align-items-center">--}}
-{{--                                                        <div class="col-auto">--}}
-{{--                                                            <img data-dz-thumbnail src="#"--}}
-{{--                                                                 class="avatar-sm rounded bg-light"--}}
-{{--                                                                 alt="">--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="col pl-0">--}}
-{{--                                                            <a href="javascript:void(0);"--}}
-{{--                                                               class="text-muted font-weight-bold"--}}
-{{--                                                               data-dz-name></a>--}}
-{{--                                                            <p class="mb-0" data-dz-size></p>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="col-auto">--}}
-{{--                                                            <!-- Button -->--}}
-{{--                                                            <a href="" class="btn btn-link btn-lg text-muted"--}}
-{{--                                                               data-dz-remove>--}}
-{{--                                                                <i class="dripicons-cross"></i>--}}
-{{--                                                            </a>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                    <!-- end file preview template -->--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group mt-3 mt-xl-0">--}}
-{{--                                    <label for="projectname">Ảnh nhỏ</label>--}}
-{{--                                    --}}{{--                                    <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>--}}
-{{--                                    <div class="dropzone" id="my-dropzone">--}}
-{{--                                        <div class="fallback">--}}
-{{--                                            <input type="file" name="thumb"  value="{{old('thumb')}}"/>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="dz-message needsclick">--}}
-{{--                                            <i class="h1 text-muted dripicons-cloud-upload"></i>--}}
-{{--                                            <h3>Drop files here or click to upload.</h3>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <!-- File Upload -->--}}
-{{--                                </div>--}}
-
+                                <div class="form-group">
+                                    <label for="single_image">Thay đổi ảnh đại diện</label>
+                                    <input type="file" class="form-control-file" id="single_image" name="thumb">
+                                    <div id="single_image_preview">
+                                    </div>
+                                </div>
                             </div> <!-- end col-->
-                            <div class="container mt-5 mb-5">
+                            <hr class="mt-3 mb-3" style="width:100%;height:2px;border-width:0;color:gray;background-color:#ddd">
+                            <div class="container mb-4">
                                 <h4>Thêm các biến thể sản phẩm</h4>
                                 <table class="table">
                                     <thead>
@@ -185,9 +146,18 @@
                                     </thead>
                                     <tbody id="variantsTableBody">
                                     <!-- Variants will be added here -->
+                                    @foreach($product->variants as $variant)
+                                        <tr>
+                                            <td><input type="text" class="form-control" name="keys[]" value="{{$variant->key}}" placeholder="Key"></td>
+                                            <td><input type="number" class="form-control" name="quantities[]" min="0" value="{{$variant->quantity}}" placeholder="0"></td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
-                                <span id="addVariantBtn" class="btn btn-primary">Thêm biến thể</span>
+{{--                                <span id="addVariantBtn" class="btn btn-primary">Thêm biến thể</span>--}}
+                                <div class="d-flex justify-content-center">
+                                    <span id="addVariantBtn" class="btn btn-outline-success btn-rounded btn-sm">Thêm </span>
+                                </div>
                             </div>
                             <input type="submit" class="btn btn-block btn-primary" value="Thêm sản phẩm">
                         </div>
@@ -223,16 +193,6 @@
                     img.src = event.target.result;
                     img.classList.add('preview-image');
                     imagePreview.appendChild(img);
-
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Xóa';
-                    deleteButton.classList.add('delete-button');
-                    deleteButton.addEventListener('click', function() {
-                        previewContainer.removeChild(imagePreview);
-                        // Có thể thêm mã ở đây để xóa ảnh tương ứng khỏi cơ sở dữ liệu hoặc bất kỳ xử lý nào khác.
-                    });
-
-                    imagePreview.appendChild(deleteButton);
                     previewContainer.appendChild(imagePreview);
                 };
 

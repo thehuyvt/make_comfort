@@ -22,13 +22,21 @@ class Product extends Model
         'status'
     ];
 
+    public function getDateCreatedAttribute()
+    {
+        return date_format($this->created_at, "d/m/Y");
+    }
     public function category():BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-
     public function images():HasMany
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
+    public function variants():HasMany
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 }

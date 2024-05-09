@@ -25,6 +25,8 @@ Route::group(['prefix' => 'categories', 'as'=>'categories.'], function (){
 
 Route::group(['prefix' => 'products', 'as'=>'products.'], function (){
     Route::get('', [ProductController::class, 'index'])->name('index');
+    Route::get('api', [ProductController::class, 'api'])->name('api');
+    Route::get('show/{productId}', [ProductController::class, 'show'])->name('show');
     Route::get('create', [ProductController::class, 'create'])->name('create');
     Route::post('store', [ProductController::class, 'store'])->name('store');
     Route::get('edit/{productId}', [ProductController::class, 'edit'])->name('edit');

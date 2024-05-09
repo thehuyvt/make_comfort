@@ -1,7 +1,10 @@
 @extends('layout.master')
 @push('css')
-    <link href="{{asset('css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>
+{{--    <link href="{{asset('css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>--}}
+{{--    <link href="{{asset('css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css"/>--}}
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 @endpush
 @section('content')
     <div class="row">
@@ -10,595 +13,34 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="javascript:void(0);" class="btn btn-danger mb-2"><i
+                            <a href="{{route('products.create')}}" class="btn btn-danger mb-2"><i
                                     class="mdi mdi-plus-circle mr-2"></i> Add Products</a>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="text-sm-right">
-                                <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-settings"></i>
-                                </button>
-                                <button type="button" class="btn btn-light mb-2 mr-1">Import</button>
-                                <button type="button" class="btn btn-light mb-2">Export</button>
-                            </div>
-                        </div><!-- end col-->
+{{--                        <div class="col-sm-8">--}}
+{{--                            <div class="text-sm-right">--}}
+{{--                                <button type="button" class="btn btn-success mb-2 mr-1"><i class="mdi mdi-settings"></i>--}}
+{{--                                </button>--}}
+{{--                                <button type="button" class="btn btn-light mb-2 mr-1">Import</button>--}}
+{{--                                <button type="button" class="btn btn-light mb-2">Export</button>--}}
+{{--                            </div>--}}
+{{--                        </div><!-- end col-->--}}
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
-                            <thead class="thead-light">
-                            <tr>
-                                <th class="all" style="width: 20px;">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                                    </div>
-                                </th>
-                                <th class="all">Product</th>
-                                <th>Category</th>
-                                <th>Added Date</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                                <th style="width: 85px;">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <label class="custom-control-label" for="customCheck2">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-1.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Amazing Modern
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Aeron Chairs
-                                </td>
-                                <td>
-                                    09/12/2018
-                                </td>
-                                <td>
-                                    $148.66
-                                </td>
+                    <table class="table table-striped text-center" id="table-index">
+                        <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Ngày tạo</th>
+                            <th>Giá bán</th>
+                            <th>Trạng thái</th>
+                            <th>Chức năng</th>
+                        </tr>
+                        </thead>
 
-                                <td>
-                                    254
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
+                    </table>
 
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                        <label class="custom-control-label" for="customCheck3">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Biblio Plastic
-                                            Armchair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Wooden Chairs
-                                </td>
-                                <td>
-                                    09/08/2018
-                                </td>
-                                <td>
-                                    $8.99
-                                </td>
-
-                                <td>
-                                    1,874
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                        <label class="custom-control-label" for="customCheck4">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Branded Wooden
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-outline"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Dining Chairs
-                                </td>
-                                <td>
-                                    09/05/2018
-                                </td>
-                                <td>
-                                    $68.32
-                                </td>
-
-                                <td>
-                                    2,541
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                        <label class="custom-control-label" for="customCheck5">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Designer
-                                            Awesome Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                        <span class="text-warning mdi mdi-star-outline"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Baby Chairs
-                                </td>
-                                <td>
-                                    08/23/2018
-                                </td>
-                                <td>
-                                    $112.00
-                                </td>
-
-                                <td>
-                                    3,540
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                        <label class="custom-control-label" for="customCheck6">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-5.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Cardan
-                                            Armchair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Plastic Armchair
-                                </td>
-                                <td>
-                                    08/02/2018
-                                </td>
-                                <td>
-                                    $59.69
-                                </td>
-
-                                <td>
-                                    26
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <label class="custom-control-label" for="customCheck7">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Bootecos
-                                            Plastic Armchair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Wing Chairs
-                                </td>
-                                <td>
-                                    07/15/2018
-                                </td>
-                                <td>
-                                    $148.66
-                                </td>
-
-                                <td>
-                                    485
-                                </td>
-                                <td>
-                                    <span class="badge badge-danger">Deactive</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                        <label class="custom-control-label" for="customCheck8">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-6.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Adirondack
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Aeron Chairs
-                                </td>
-                                <td>
-                                    07/07/2018
-                                </td>
-                                <td>
-                                    $65.94
-                                </td>
-
-                                <td>
-                                    652
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                        <label class="custom-control-label" for="customCheck9">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-2.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Bean Bag
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Wooden Chairs
-                                </td>
-                                <td>
-                                    06/30/2018
-                                </td>
-                                <td>
-                                    $99
-                                </td>
-
-                                <td>
-                                    1,021
-                                </td>
-                                <td>
-                                    <span class="badge badge-danger">Deactive</span>
-                                </td>
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                        <label class="custom-control-label" for="customCheck10">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-3.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">The butterfly
-                                            chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Dining Chairs
-                                </td>
-                                <td>
-                                    06/19/2018
-                                </td>
-                                <td>
-                                    $58
-                                </td>
-
-                                <td>
-                                    874
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                        <label class="custom-control-label" for="customCheck11">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-4.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Eames Lounge
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Baby Chairs
-                                </td>
-                                <td>
-                                    05/06/2018
-                                </td>
-                                <td>
-                                    $39.5
-                                </td>
-
-                                <td>
-                                    1,254
-                                </td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck12">
-                                        <label class="custom-control-label" for="customCheck12">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-5.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Farthingale
-                                            Chair</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Plastic Armchair
-                                </td>
-                                <td>
-                                    04/09/2018
-                                </td>
-                                <td>
-                                    $78.66
-                                </td>
-
-                                <td>
-                                    524
-                                </td>
-                                <td>
-                                    <span class="badge badge-danger">Deactive</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck13">
-                                        <label class="custom-control-label" for="customCheck13">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/products/product-6.jpg" alt="contact-img"
-                                         title="contact-img" class="rounded mr-3" height="48"/>
-                                    <p class="m-0 d-inline-block align-middle font-16">
-                                        <a href="apps-ecommerce-products-details.html" class="text-body">Unpowered
-                                            aircraft</a>
-                                        <br/>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star"></span>
-                                        <span class="text-warning mdi mdi-star-half"></span>
-                                    </p>
-                                </td>
-                                <td>
-                                    Wing Chairs
-                                </td>
-                                <td>
-                                    03/24/2018
-                                </td>
-                                <td>
-                                    $49
-                                </td>
-
-                                <td>
-                                    204
-                                </td>
-                                <td>
-                                    <span class="badge badge-danger">Deactive</span>
-                                </td>
-
-                                <td class="table-action">
-                                    <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-square-edit-outline"></i></a>
-                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                            class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -608,11 +50,90 @@
 
 @push('js')
     <!-- third party js -->
-    <script src="{{asset('js/vendor/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/vendor/dataTables.bootstrap4.js')}}"></script>
-    <script src="{{asset('js/vendor/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('js/vendor/responsive.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/vendor/dataTables.checkboxes.min.js')}}"></script>
-
+{{--    <script src="{{asset('js/vendor/jquery.dataTables.min.js')}}"></script>--}}
+{{--    <script src="{{asset('js/vendor/dataTables.bootstrap4.js')}}"></script>--}}
+{{--    <script src="{{asset('js/vendor/dataTables.responsive.min.js')}}"></script>--}}
+{{--    <script src="{{asset('js/vendor/responsive.bootstrap4.min.js')}}"></script>--}}
+{{--    <script src="{{asset('js/vendor/dataTables.checkboxes.min.js')}}"></script>--}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.js"></script>
     <!-- third party js ends -->
+    <script>
+        $(function () {
+            //select2
+            // $('#select-courses').select2('data', null);
+
+            //
+            var buttonCommon = {
+                exportOptions: {
+                    columns: ':visible :not(.not-export)'
+                }
+            };
+            let table = $('#table-index').DataTable({
+                dom:  'Blfrtip',
+                select: true,
+                "lengthMenu": [1, 10, 15, 20, 25],
+                "pageLength": 10,
+                buttons: [
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'excelHtml5'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'pdfHtml5'
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'print'
+                    }),
+                    'colvis'
+                ],
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('products.api') !!}',
+                columnDefs: [
+                    {className: "not-export", "targets": [5]}
+                ],
+                columns: [
+                    {
+                        data: 'product',
+                        targets: 0,
+                        orderable: false,
+                        searchable: true,
+                        render: function (data) {
+                            if (!data) {
+                                return '';
+                            } else {
+                                var imageUrl = data['image'] ? "{{asset('storage')}}"+ "\\" + data['image'] : '';
+                                var productId = data['id'] ? data['id'] : '';
+                                return `<td class="sorting_1">
+                                            <a href="{{route('products.edit', '')}}/${productId}" class="text-body">
+                                                <img src="${imageUrl}" alt="img" title="contact-img" class="rounded mr-3" height="48">
+                                            </a>
+                                            <br>
+                                        </td>`;
+                            }
+                        }
+                    },
+                    {data: 'name', name: 'name'},
+                    {data: 'category_name', name: 'category_name'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'sale_price', name: 'sale_price'},
+                    {data: 'status', name: 'status'},
+                    {
+                        data: 'action',
+                        targets: 6,
+                        orderable: false,
+                        searchable: false,
+                        render: function (data, type, row, meta) {
+                            return `<td class="table-action">
+<!--                                        <a href="${data['show']}" class="action-icon"> <i class="mdi mdi-eye"></i></a>-->
+                                        <a href="${data['edit']}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                    </td>`;
+                        }
+                    },
+                ]
+            });
+
+        });
+    </script>
 @endpush

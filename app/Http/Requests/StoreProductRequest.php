@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\ProductStatusEnum;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -67,6 +68,14 @@ class StoreProductRequest extends FormRequest
             'images.*' => [
                 'image',
             ],
+            'keys' => [
+                'required',
+                'array',
+            ],
+            'key.*' => [
+                'string',
+            ],
+
         ];
     }
 }
