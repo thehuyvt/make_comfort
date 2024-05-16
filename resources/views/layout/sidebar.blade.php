@@ -50,6 +50,26 @@
                 </ul>
             </li>
 
+            <li class="side-nav-item">
+                <a href="{{route('categories.index')}}" class="side-nav-link">
+{{--                    <i class="uil-home-alt"></i>--}}
+                    <span> Danh sách loại sản phẩm </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="{{route('products.index')}}" class="side-nav-link">
+{{--                    <i class="uil-home-alt"></i>--}}
+                    <span> Danh sách sản phẩm </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="{{route('users.index')}}" class="side-nav-link">
+                    {{--                    <i class="uil-home-alt"></i>--}}
+                    <span> Danh sách nhân viên </span>
+                </a>
+            </li>
 
         </ul>
         <!-- End Sidebar -->

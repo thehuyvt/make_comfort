@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use App\Models\Product;
 
 class CustomerController extends Controller
 {
@@ -13,7 +15,16 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::query()->paginate(3);
+        $products = Product::query()->limit(16)->get();
+        foreach ($products as $product){
+            $product->sale_price = number_format($product->sale_price);
+            $product->old_price = number_format($product->old_price);
+        }
+        return view('customer.index',[
+            'categories' => $categories,
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -35,9 +46,15 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function productDetail($slug)
     {
-        //
+        $product = Product::query()->where('slug', $slug)->firstOrFail();
+        $product->sale_price = number_format($product->sale_price);
+        $product->old_price = number_format($product->old_price);
+
+        return view('customer.product.detail', [
+            'product'=>$product,
+        ]);
     }
 
     /**

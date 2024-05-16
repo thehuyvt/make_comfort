@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserStatusEnum;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +25,33 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>[
+                'required',
+                'string',
+                'min:2',
+            ],
+            'phone_number'=>[
+                'required',
+                'string',
+                'max:20',
+                Rule::unique(User::class)->ignore($this->userId),
+            ],
+            'email'=>[
+                'required',
+                'email',
+                'sometimes',
+                Rule::unique(User::class)->ignore($this->userId),
+            ],
+            'password'=>[
+                'required',
+                'string',
+                'between:6, 16',
+                'sometimes',
+            ],
+            'status'=>[
+                'required',
+                Rule::in(UserStatusEnum::getArrayStatus()),
+            ]
         ];
     }
 }

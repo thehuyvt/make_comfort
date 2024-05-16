@@ -2,7 +2,8 @@
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-right-menu float-right mb-0">
         <li class="dropdown notification-list d-lg-none">
-            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-search noti-icon"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
@@ -12,37 +13,44 @@
             </div>
         </li>
         <li class="dropdown notification-list topbar-dropdown">
-            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
                 <img src="{{asset('/images/flags/us.jpg')}}" alt="user-image" class="mr-0 mr-sm-1" height="12">
-                <span class="align-middle d-none d-sm-inline-block">English</span> <i class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
+                <span class="align-middle d-none d-sm-inline-block">English</span> <i
+                    class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu">
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <img src="{{asset('/images/flags/germany.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
+                    <img src="{{asset('/images/flags/germany.jpg')}}" alt="user-image" class="mr-1" height="12"> <span
+                        class="align-middle">German</span>
                 </a>
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <img src="{{asset('/images/flags/italy.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
+                    <img src="{{asset('/images/flags/italy.jpg')}}" alt="user-image" class="mr-1" height="12"> <span
+                        class="align-middle">Italian</span>
                 </a>
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <img src="{{asset('/images/flags/spain.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
+                    <img src="{{asset('/images/flags/spain.jpg')}}" alt="user-image" class="mr-1" height="12"> <span
+                        class="align-middle">Spanish</span>
                 </a>
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <img src="{{asset('/images/flags/russia.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
+                    <img src="{{asset('/images/flags/russia.jpg')}}" alt="user-image" class="mr-1" height="12"> <span
+                        class="align-middle">Russian</span>
                 </a>
 
             </div>
         </li>
 
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
                 <span class="noti-icon-badge"></span>
             </a>
@@ -83,7 +91,8 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon">
-                            <img src="{{asset('/images/users/avatar-2.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="{{asset('/images/users/avatar-2.jpg')}}" class="img-fluid rounded-circle" alt=""/>
+                        </div>
                         <p class="notify-details">Cristina Pride</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Hi, How are you? What about our next meeting</small>
@@ -103,7 +112,8 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon">
-                            <img src="{{asset('/images/users/avatar-4.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="{{asset('/images/users/avatar-4.jpg')}}" class="img-fluid rounded-circle" alt=""/>
+                        </div>
                         <p class="notify-details">Karen Robinson</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Wow ! this admin looks good and awesome design</small>
@@ -131,7 +141,8 @@
         </li>
 
         <li class="dropdown notification-list d-none d-sm-inline-block">
-            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-view-apps noti-icon"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg p-0">
@@ -191,20 +202,23 @@
         </li>
 
         <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false"
                aria-expanded="false">
-                                    <span class="account-user-avatar">
-                                        <img src="{{asset('/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
-                                    </span>
+                <span class="account-user-avatar">
+                    <img src="{{asset('/images/users/avatar-1.jpg')}}" alt="user-image"
+                         class="rounded-circle">
+                </span>
                 <span>
-                                        <span class="account-user-name">Dominic Keller</span>
-                                        <span class="account-position">Founder</span>
-                                    </span>
+                    <span class="account-user-name">{{session()->get('name')}}</span>
+                    <span
+                        class="account-position">{{session()->get('role') === 1 ? "Quản trị viên" : "Nhân viên"}}</span>
+                </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                 <!-- item-->
                 <div class=" dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Welcome !</h6>
+                    <h6 class="text-overflow m-0">Xin chào !</h6>
                 </div>
 
                 <!-- item-->
@@ -214,27 +228,14 @@
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{route('users.change-password')}}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-edit mr-1"></i>
-                    <span>Settings</span>
+                    <span>Đổi mật khẩu</span>
                 </a>
-
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-lifebuoy mr-1"></i>
-                    <span>Support</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-lock-outline mr-1"></i>
-                    <span>Lock Screen</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{route('admin.logout')}}" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout mr-1"></i>
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
                 </a>
 
             </div>
@@ -289,7 +290,8 @@
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <div class="media">
-                        <img class="d-flex mr-2 rounded-circle" src="{{asset('/images/users/avatar-2.jpg')}}" alt="Generic placeholder image" height="32">
+                        <img class="d-flex mr-2 rounded-circle" src="{{asset('/images/users/avatar-2.jpg')}}"
+                             alt="Generic placeholder image" height="32">
                         <div class="media-body">
                             <h5 class="m-0 font-14">Erwin Brown</h5>
                             <span class="font-12 mb-0">UI Designer</span>
@@ -300,7 +302,8 @@
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                     <div class="media">
-                        <img class="d-flex mr-2 rounded-circle" src="{{asset('/images/users/avatar-5.jpg')}}" alt="Generic placeholder image" height="32">
+                        <img class="d-flex mr-2 rounded-circle" src="{{asset('/images/users/avatar-5.jpg')}}"
+                             alt="Generic placeholder image" height="32">
                         <div class="media-body">
                             <h5 class="m-0 font-14">Jacob Deo</h5>
                             <span class="font-12 mb-0">Developer</span>

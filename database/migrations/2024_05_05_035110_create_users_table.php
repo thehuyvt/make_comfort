@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone_number');
             $table->tinyInteger('role');
+//            $table->boolean('active');
             $table->timestamps();
         });
     }

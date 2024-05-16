@@ -17,8 +17,9 @@
     @stack('css')
 
 </head>
-
+@yield('body')
 <body data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+
 <!-- Begin page -->
 <div class="wrapper">
     <!-- ========== Left Sidebar Start ========== -->
